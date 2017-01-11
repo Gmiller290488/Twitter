@@ -8,8 +8,8 @@ import tweepy, time
 from gettweetsbot import getLastTweet
 from random import randint
 from credentials import *
-auth = tweepy.OAuthHandler("by7gysv0hewbapQCtK0c7KhwL", "kIhzeX3qtSp7b918EaoYFZU4KE6a9Y8yMXLM2nxHvr6PCuYjkC")
-auth.set_access_token("779373637266800641-lrOdTqBi8vFn4nA5rZa153DUbhgwVnM", "VJZpYiv1hvI0D72dQm9sGaIn3SfI9WzOWihIBmSUVuk81")
+auth = tweepy.OAuthHandler("EDITED OUT", "EDITED OUT")
+auth.set_access_token("EDITED OUT", "EDITED OUT")
 api = tweepy.API(auth)
 
 
