@@ -13,16 +13,16 @@ from credentials import *
 
 
 # twitter credentials
-auth = tweepy.OAuthHandler("4Uu7Ewc3u76cowtx3xfmyts8v", "urKWZ7LcjAl5D2828xO9uQ6Pywcym7g0QNXwlipAVyiK4ake8L")
-auth.set_access_token("790632355484622848-E2mQvr5ODFC0K4XofS8s7EJDUSguIcy", "LjJiec4rEZIuqqpbQeAl3Yk57PtVNf2hWiXbd989azuOo")
+auth = tweepy.OAuthHandler("EDITED OUT", "EDITED OUT")
+auth.set_access_token("EDITED OUT", "EDITED OUT")
 api = tweepy.API(auth)
 user = ["@ctingcter ", "@runwithalice "]
 
 #twilio variables
-myTwilioNumber = "+441865922379"
-myPhoneNumber = "+447739988398"
-accountSID = "AC93948e9cd1e5c5a432026ae15c15e65d"
-authToken = "246a9c92c1033b40c8eadad78535b210"
+myTwilioNumber = "EDITED OUT"
+myPhoneNumber = "EDITED OUT"
+accountSID = "EDITED OUT"
+authToken = "EDITED OUT"
 twilioCli = TwilioRestClient(accountSID, authToken)
 
 
