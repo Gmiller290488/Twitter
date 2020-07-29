@@ -4,14 +4,15 @@ import pandas as pd
 from pandas import DataFrame 
 
 # twitter credentials
-auth = tweepy.OAuthHandler("", "")
-auth.set_access_token("", "")
+
+auth = tweepy.OAuthHandler("XB6Ti8bTuX99NO5RHnRZ6RF8D", "s2G2lkSc3ULXZ7rK0Z5xHAxAvY8pUvNT6YuC1GdzA17l1c7MzU")
+auth.set_access_token("1288468850779000833-j9lfidvfygjDKCmg96zfWOWI4EgM2n", "CN2pQSgoPnUeqXTf1RnWz0eRSyCNyRT4dY0kRVndB1SAG")
 
 api = tweepy.API(auth, wait_on_rate_limit=True,
     wait_on_rate_limit_notify=True)
 
-target_user = "@DThompsonDev"
-bot_name = "@DThompsonFanBo1"
+target_user = "@wellpaidgeek"
+bot_name = "@wellpaidgeekbot"
 
 def get_tweets():
     tweets = api.user_timeline(screen_name=target_user, 
@@ -61,16 +62,15 @@ def restart():
     get_tweets()
 
 def read_tweets_from_spreadsheet():
-    tweets_from_csv = pd.read_csv("@DThompsonDev_tweets_long_text.csv")
+    tweets_from_csv = pd.read_csv("@wellpaidgeek_tweets_long_text.csv")
     return tweets_from_csv 
 
 def tweet_from_id(tweets_from_csv):
     tweetList = [tweet for tweet in tweets_from_csv["text"]]
     while len(tweetList) > 1:
-        time.sleep(2*60*60)
-
+    
         if len(tweetList[0]) < 266:
-            tweet = tweetList[0] + ' @DThompsonDev'
+            tweet = tweetList[0] + ' @wellpaidgeek'
             print(tweet)
             api.update_status(tweet)
         else:
@@ -80,16 +80,18 @@ def tweet_from_id(tweets_from_csv):
             middle = round(len(long_tweet_words)/2)
             first_half = long_tweet_words[:middle]
             second_half = long_tweet_words[middle:]
-            api.update_status(' '.join(first_half) + ' [cont] @DThompsonDev')
-            api.update_status('[cont] ' + ' '.join(second_half) + ' @DThompsonDev')
-            print(' '.join(first_half) + ' [cont] @DThompsonDev')
+            api.update_status(' '.join(first_half) + ' [cont] @wellpaidgeek')
+            api.update_status('[cont] ' + ' '.join(second_half) + ' @wellpaidgeek')
+            print(' '.join(first_half) + ' [cont] @wellpaidgeek')
             print("********************************************")
-            print('[cont] ' + ' '.join(second_half) + ' @DThompsonDev')
+            print('[cont] ' + ' '.join(second_half) + ' @wellpaidgeek')
         tweetList = tweetList[1:]
         print("==============================================")
         print("Next tweet will be:")
-        print(tweetList[0] + ' @DThompsonDev')
+        print(tweetList[0] + ' @wellpaidgeek')
         print("==============================================")
+
+        time.sleep(2*60*60)
         
     restart() 
     
