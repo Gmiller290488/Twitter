@@ -40,7 +40,6 @@ def get_tweets():
     def get_favourite_count(tweet):
         return tweet.favorite_count
 
-    # filtered_tweets = [tweet for tweet in all_tweets if '@' not in tweet.full_text and tweet.favorite_count > 50 and len(tweet.full_text) < 266]
     filtered_tweets = [tweet for tweet in all_tweets if '@' not in tweet.full_text and tweet.favorite_count > 50]
     filtered_tweets.sort(key=get_favourite_count, reverse=True)
 
@@ -51,7 +50,7 @@ def get_tweets():
                 tweet.full_text.encode("utf-8").decode("utf-8")] 
                 for idx,tweet in enumerate(filtered_tweets)] 
     df = DataFrame(outtweets,columns=["id","created_at","favorite_count","retweet_count", "text"])
-    df.to_csv('%s_tweets_long_text.csv' % target_user,index=False)
+    df.to_csv('%s_tweets_test.csv' % target_user,index=False)
     df.head(3)
 
     tweets_from_csv = read_tweets_from_spreadsheet()
@@ -61,18 +60,17 @@ def restart():
     get_tweets()
 
 def read_tweets_from_spreadsheet():
-    tweets_from_csv = pd.read_csv("@DThompsonDev_tweets_long_text.csv")
+    tweets_from_csv = pd.read_csv('%s_tweets.csv' % target_user)
     return tweets_from_csv 
 
 def tweet_from_id(tweets_from_csv):
-    tweetList = [tweet for tweet in tweets_from_csv["text"]]
+    tweetList = [tweet.replace('-&lt;', '<').replace('-&gt;', '>').replace('&amp;', '&') for tweet in tweets_from_csv["text"]]
     while len(tweetList) > 1:
-        time.sleep(2*60*60)
-
+        
         if len(tweetList[0]) < 266:
             tweet = tweetList[0] + ' @DThompsonDev'
             print(tweet)
-            api.update_status(tweet)
+            # api.update_status(tweet)
         else:
             long_tweet = tweetList[0]
             long_tweet_words = long_tweet.split()
@@ -80,8 +78,8 @@ def tweet_from_id(tweets_from_csv):
             middle = round(len(long_tweet_words)/2)
             first_half = long_tweet_words[:middle]
             second_half = long_tweet_words[middle:]
-            api.update_status(' '.join(first_half) + ' [cont] @DThompsonDev')
-            api.update_status('[cont] ' + ' '.join(second_half) + ' @DThompsonDev')
+            # api.update_status(' '.join(first_half) + ' [cont] @DThompsonDev')
+            # api.update_status('[cont] ' + ' '.join(second_half) + ' @DThompsonDev')
             print(' '.join(first_half) + ' [cont] @DThompsonDev')
             print("********************************************")
             print('[cont] ' + ' '.join(second_half) + ' @DThompsonDev')
@@ -91,8 +89,10 @@ def tweet_from_id(tweets_from_csv):
         print(tweetList[0] + ' @DThompsonDev')
         print("==============================================")
         
+        time.sleep(1*60*60)
+
     restart() 
     
-# get_tweets()
-tweets_from_csv = read_tweets_from_spreadsheet()
-tweet_from_id(tweets_from_csv)
+get_tweets()
+# tweets_from_csv = read_tweets_from_spreadsheet()
+# tweet_from_id(tweets_from_csv)
