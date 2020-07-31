@@ -10,8 +10,8 @@ auth.set_access_token("", "")
 api = tweepy.API(auth, wait_on_rate_limit=True,
     wait_on_rate_limit_notify=True)
 
-target_user = "@DThompsonDev"
-bot_name = "@DThompsonFanBo1"
+target_user = ""
+bot_name = ""
 time_to_sleep = 60*60 #1 hour
 
 def get_tweets():
@@ -91,11 +91,6 @@ def tweet_from_list(tweets_list):
             print("********************************************")
             print('[cont] ' + ' '.join(second_tweet) + ' ')
         tweets_list = tweets_list[1:]
-        print("==============================================")
-        print("Next tweet will be:")
-        print(tweets_list[0] + ' %s' % target_user)
-        print("==============================================")
-        
         time.sleep(time_to_sleep)
 
     restart() 
