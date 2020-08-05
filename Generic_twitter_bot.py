@@ -14,7 +14,13 @@ target_user = ""
 bot_name = ""
 time_to_sleep = 60*60 #1 hour
 
-def get_tweets():
+def get_last_bot_tweet():
+    return api.user_timeline(screen_name=bot_name, 
+                            count=1,
+                            include_rts = False,
+                            tweet_mode = 'extended'
+                            )
+def get_user_tweets():
     tweets = api.user_timeline(screen_name=target_user, 
                             count=200,
                             include_rts = False,
@@ -82,15 +88,20 @@ def tweet_from_list(tweets_list):
         if len(tweets_list[0]) < 266:
             tweet = tweets_list[0] + ' %s' % target_user
             print(tweet)
-            # api.update_status(tweet)
+            api.update_status(tweet)
         else:
-            first_tweet, second_tweet = split_long_tweet(tweets_list[0])
-            # api.update_status(' '.join(first_tweet) + ' [cont] %s' % target_user)
-            # api.update_status('[cont] ' + ' '.join(second_tweet) + ' %s' % target_user)
-            print(' '.join(first_tweet) + ' [cont] %s' % target_user)
-            print("********************************************")
-            print('[cont] ' + ' '.join(second_tweet) + ' ')
+            tweet = tweets_list[0]
+            print(tweet)
+            api.update_status(tweet)
+            last_tweet_set = get_last_bot_tweet()
+            api.update_status(bot_name + ' %s' % target_user, last_tweet_set[0].id_str)
+
         tweets_list = tweets_list[1:]
+        print("==============================================")
+        print("Next tweet will be:")
+        print(tweets_list[0] + ' %s' % target_user)
+        print("==============================================")
+        
         time.sleep(time_to_sleep)
 
     restart() 
