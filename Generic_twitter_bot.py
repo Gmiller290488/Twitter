@@ -67,7 +67,7 @@ def put_tweets_into_csv(tweets):
     df.head(3)
 
 def restart():
-    sort_tweets(filter_tweets(get_tweets()))
+    sort_tweets(filter_tweets(get_user_tweets()))
     tweet_from_list(format_tweets(read_tweets_from_spreadsheet()))
     
 def read_tweets_from_spreadsheet():
