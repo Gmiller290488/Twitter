@@ -4,8 +4,8 @@ import pandas as pd
 from pandas import DataFrame 
 
 # twitter credentials
-auth = tweepy.OAuthHandler("Dd4slek3NaGruXumIi63mcPbB", "4lT2bIeTgPfbv4vY34y5bRvex4td5Hv3B9t5tGmjYYt8aMOWq7")
-auth.set_access_token("1288040332714745857-D9MuPzis6CXCaBbL0LtEQXtdXmqDVV", "c4myasCchga02C5rNC67897uhj3OAdz2GDsF2bRPoCXxP")
+auth = tweepy.OAuthHandler("", "")
+auth.set_access_token("", "")
 
 api = tweepy.API(auth, wait_on_rate_limit=True,
     wait_on_rate_limit_notify=True)
